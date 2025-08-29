@@ -38,7 +38,7 @@ public class Garage {
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "json")
-    private Map<DayOfWeek, List<OpeningTime>> horairesOuverture = new HashMap<>();
+    private Map<DayOfWeek, List<OpeningTime>> openingHours = new HashMap<>();
 
     @OneToMany(mappedBy = "garage", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Vehicle> vehicles = new ArrayList<>();
