@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.renault.dto.VehicleDTO;
 import org.renault.mapper.VehicleMapper;
+import org.renault.messaging.VehiclePublisher;
 import org.renault.model.Garage;
 import org.renault.model.Vehicle;
 import org.renault.repository.GarageRepository;
@@ -20,6 +21,7 @@ public class VehicleService {
 
     private final VehicleRepository vehicleRepository;
     private final GarageRepository garageRepository;
+    private final VehiclePublisher vehiclePublisher;
 
     public VehicleDTO createVehicle(VehicleDTO vehicleDTO) {
         Garage garage = garageRepository.findById(vehicleDTO.getGarageId())
@@ -33,8 +35,9 @@ public class VehicleService {
         vehicle.setGarage(garage);
 
         Vehicle savedVehicle = vehicleRepository.save(vehicle);
-
-        return VehicleMapper.mapToDTO(savedVehicle);
+        VehicleDTO savedDTO = VehicleMapper.mapToDTO(savedVehicle);
+        vehiclePublisher.publishVehicleCreated(savedDTO);
+        return savedDTO;
     }
 
     @Transactional(readOnly = true)
