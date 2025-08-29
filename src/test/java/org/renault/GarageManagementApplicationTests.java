@@ -1,4 +1,4 @@
-package org.renault.garagemanagement;
+package org.renault;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

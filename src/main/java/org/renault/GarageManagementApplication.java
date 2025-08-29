@@ -1,4 +1,4 @@
-package org.renault.garagemanagement;
+package org.renault;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
